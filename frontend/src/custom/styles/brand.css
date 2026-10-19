@@ -1,0 +1,33 @@
+:root {
+  --brand-surface: #ffffff;
+  --brand-canvas: #f8faff;
+  --brand-ink: #18213b;
+  --brand-muted: #53617b;
+  --brand-line: #e2e7f0;
+}
+
+.dark {
+  --brand-surface: #121b30;
+  --brand-canvas: #0b1224;
+  --brand-ink: #eef2ff;
+  --brand-muted: #aab7cf;
+  --brand-line: #29344c;
+}
+
+.brand-scope {
+  color: var(--brand-ink);
+  background: var(--brand-canvas);
+}
+
+.brand-scope :where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid #818cf8;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-scope *, .brand-scope *::before, .brand-scope *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
