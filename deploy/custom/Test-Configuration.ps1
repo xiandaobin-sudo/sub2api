@@ -28,6 +28,8 @@ try {
         $config = ($raw -join "`n") | ConvertFrom-Json
         foreach ($service in @('sub2api','postgres','redis')) {
             if ($config.services.$service.container_name) { throw "Fixed container name: $region/$service" }
+            $logging = $config.services.$service.logging
+            if ($logging.driver -ne 'json-file' -or $logging.options.'max-size' -ne '20m' -or $logging.options.'max-file' -ne '5') { throw "Missing bounded logs: $region/$service" }
         }
         if ($config.services.postgres.ports -or $config.services.redis.ports) { throw "Database/cache port exposed: $region" }
         if (@($config.services.sub2api.ports).Count -ne 1 -or $config.services.sub2api.ports[0].host_ip -ne '127.0.0.1') { throw "Unexpected application ports: $region" }

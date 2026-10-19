@@ -71,7 +71,7 @@ docker compose --env-file deploy/custom/global/.env -f deploy/custom/compose.yam
 
 示例支持 SSE 和 WebSocket、不缓存 API、保留后端生成的 CSP nonce。它覆盖 X-Forwarded-For / X-Real-IP 并清除常见伪造头，不把用户提交的转发链直接透传。模板关闭 `security.trust_forwarded_ip_for_api_key_acl` 旧兼容模式；`SERVER_TRUSTED_PROXIES` 必须填应用容器实际看到的直接代理 IP/CIDR。宿主机经 Docker 转发时通常是该项目网络的网关，先用 `docker network inspect sub2api-cn_sub2api-network` / global 对应网络核实，不能盲填任意网段。未配置时仅信任 loopback，因此外部代理的真实客户 IP 不会自动被信任。若还有 CDN，需要在 Nginx 正确配置可信 CDN 的 real_ip，再让应用只信任直接代理。
 
-必须使用两个不同站点域名；只用同域名不同端口不能隔离浏览器 localStorage/Cookie。OAuth、支付通知/返回 URL、API 地址和文档在各自后台填写对应域名。真实支付回调只在经授权的测试商户或沙箱中验收。
+正式双站必须使用两个不同站点域名；localStorage 按源（含端口）隔离，但 Cookie 不按端口隔离，因此只换端口不足以隔离 Cookie。OAuth、支付通知/返回 URL、API 地址和文档在各自后台填写对应域名。真实支付回调只在经授权的测试商户或沙箱中验收。
 
 ## 备份、升级与迁移
 
@@ -91,4 +91,4 @@ docker compose --env-file deploy/custom/cn/.env -f deploy/custom/compose.yaml cp
 
 ## 本次验证范围
 
-Docker 引擎未运行；Compose CLI 可用。已验证配置解析、同一镜像地址、独立项目/卷/网络/端口、移除固定容器名和语言挂载；没有构建镜像、启动数据库或执行真实支付。Nginx 示例未在实际 Nginx 运行时验收。上线前需要补做：镜像启动与自动迁移、两站互不可登录/使用对方密钥、模型测试请求、计费与支付沙箱、备份恢复、TLS、可信代理和限流。
+2026-10-19 已完成本地统一镜像构建和双实例基础运行检查，具体通过项、阻塞项、镜像 ID 和未验证范围见 [本地验收记录](LOCAL_ACCEPTANCE.md)。该记录不代表正式服务器、实际模型调用、支付或备份恢复验收通过。

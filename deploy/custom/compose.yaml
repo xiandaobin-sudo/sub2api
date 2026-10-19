@@ -25,7 +25,7 @@ services:
         read_only: true
         bind:
           create_host_path: false
-    logging:
+    logging: &bounded-logs
       driver: json-file
       options: { max-size: "20m", max-file: "5" }
   postgres:
@@ -33,11 +33,13 @@ services:
       file: ../docker-compose.yml
       service: postgres
     container_name: !reset null
+    logging: *bounded-logs
   redis:
     extends:
       file: ../docker-compose.yml
       service: redis
     container_name: !reset null
+    logging: *bounded-logs
 volumes:
   sub2api_data:
   postgres_data:
