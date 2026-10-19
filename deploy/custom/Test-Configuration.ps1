@@ -45,6 +45,8 @@ try {
     if ($configs.cn.networks.'sub2api-network'.name -eq $configs.global.networks.'sub2api-network'.name) { throw 'Shared network' }
     if ($configs.cn.services.sub2api.environment.JWT_SECRET -eq $configs.global.services.sub2api.environment.JWT_SECRET) { throw 'Shared JWT secret' }
     if ($configs.cn.services.sub2api.environment.DATABASE_PASSWORD -eq $configs.global.services.sub2api.environment.DATABASE_PASSWORD) { throw 'Shared database password' }
+    if ($configs.cn.services.sub2api.environment.REDIS_PASSWORD -eq $configs.global.services.sub2api.environment.REDIS_PASSWORD) { throw 'Shared Redis password' }
+    if ($configs.cn.services.sub2api.environment.TOTP_ENCRYPTION_KEY -eq $configs.global.services.sub2api.environment.TOTP_ENCRYPTION_KEY) { throw 'Shared TOTP key' }
     Write-Output 'PASS: same image; distinct projects, volumes, networks, ports, secrets and runtime languages. No services started.'
 } finally {
     foreach ($key in $keys) { [Environment]::SetEnvironmentVariable($key, $saved[$key], 'Process') }
