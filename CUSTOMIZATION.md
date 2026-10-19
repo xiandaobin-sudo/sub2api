@@ -33,3 +33,13 @@
 新增 `custom/components/BrandAuthPanel.vue`，修改官方 `components/layout/AuthLayout.vue` 的容器及品牌展示接入，保留原有默认/页脚插槽、设置加载和 Logo URL 校验。桌面双栏、900px 以下单列。CSS 仅通过专用 class 作用于认证布局；LoginView、RegisterView、API、store、表单验证、第三方登录、人机验证及协议流程均未修改。重置密码和其他使用同一布局的页面也继承视觉风格。
 
 阶段验证：布局及原版登录注册 14 项测试通过，lint/构建通过。模拟配置浏览器检查覆盖英文桌面浅色、中文手机深色登录及注册页，确认表单存在、空表单校验失败、390px 无横向溢出。未提交真实登录/注册请求，OAuth、人机验证、支付等真实服务未运行。
+
+## 阶段 4：同镜像双部署
+
+新增 `deploy/custom/compose.yaml` 通过 extends 复用官方三个服务。保留官方 Dockerfile/Compose；清除固定容器名、仅发布各自 loopback 应用端口，三个卷和网络按项目名隔离。CN/Global 各有 `.env.example` 与只读 site.json，凭据必须独立填写，同一个不可变应用 digest。Nginx 示例及操作/备份/能力矩阵见 `deploy/custom/README.md`。
+
+新增 `frontend/public/custom/site.json` 作为官方静态覆盖机制的已知资源；`custom/runtime/locale.ts` 读取其默认语言，官方 `i18n/index.ts` 仅增加 import 与初始化接入。手动偏好优先，无 IP 推断、无后端 API/数据库变化，默认镜像保留原浏览器语言行为。
+
+`deploy/custom/Test-Configuration.ps1` 只解析配置并断言隔离性，不启动服务。已通过 Compose 双配置校验、运行时语言 9 项测试和组件回归、lint/构建；浏览器使用模拟 runtime JSON 验证 zh/en 默认及保存偏好优先。没有实际 Docker 嵌入资源挂载运行验证，原因是 Docker 引擎未启动。
+
+已知业务边界：官方支持国内及 Stripe/Airwallex 支付适配、部分订单币种/换算；余额、计费与额度仍有 USD 语义，套餐币种标签为展示字段，不能宣称已实现完整人民币账本或多币种钱包。不修改计费后端，不进行真实交易。

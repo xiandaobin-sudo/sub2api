@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n'
+import { readDeploymentLocale } from '@/custom/runtime/locale'
 
 type LocaleCode = 'en' | 'zh'
 
@@ -54,6 +55,8 @@ export async function loadLocaleMessages(locale: LocaleCode): Promise<void> {
 }
 
 export async function initI18n(): Promise<void> {
+  const deploymentLocale = await readDeploymentLocale()
+  if (deploymentLocale) i18n.global.locale.value = deploymentLocale
   const current = getLocale()
   await loadLocaleMessages(current)
   document.documentElement.setAttribute('lang', current)

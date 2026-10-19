@@ -1,0 +1,46 @@
+# Compose >= 2.24.4 is required for !reset and !override.
+name: ${COMPOSE_PROJECT_NAME:?Set a distinct project name per site}
+services:
+  sub2api:
+    extends:
+      file: ../docker-compose.yml
+      service: sub2api
+    image: ${APP_IMAGE:?Set the SAME immutable application image digest for both sites}
+    container_name: !reset null
+    ports: !override
+      - "127.0.0.1:${APP_PORT:?Set a distinct loopback port per site}:8080"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?Set an independent JWT secret}
+      TOTP_ENCRYPTION_KEY: ${TOTP_ENCRYPTION_KEY:?Set an independent TOTP encryption key}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?Set the initial site administrator email}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set the initial administrator password}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set an independent Redis password}
+      REDIS_DB: "0"
+      SECURITY_TRUST_FORWARDED_IP_FOR_API_KEY_ACL: "false"
+      SERVER_TRUSTED_PROXIES: ${SERVER_TRUSTED_PROXIES:-127.0.0.1/32}
+    volumes:
+      - type: bind
+        source: ${SITE_CONFIG:?Select cn/site.json or global/site.json}
+        target: /app/data/public/custom/site.json
+        read_only: true
+        bind:
+          create_host_path: false
+    logging:
+      driver: json-file
+      options: { max-size: "20m", max-file: "5" }
+  postgres:
+    extends:
+      file: ../docker-compose.yml
+      service: postgres
+    container_name: !reset null
+  redis:
+    extends:
+      file: ../docker-compose.yml
+      service: redis
+    container_name: !reset null
+volumes:
+  sub2api_data:
+  postgres_data:
+  redis_data:
+networks:
+  sub2api-network:
