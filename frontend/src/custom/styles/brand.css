@@ -26,6 +26,36 @@
   outline-offset: 4px;
 }
 
+.brand-auth-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 448px);
+  align-items: center;
+  gap: clamp(40px, 7vw, 110px);
+  padding: 36px max(32px, calc((100vw - 1120px) / 2));
+}
+
+.brand-auth-form { margin-block: 36px; }
+.brand-auth-layout .brand-auth-form .text-gradient {
+  background: none;
+  color: var(--brand-accent);
+}
+.brand-auth-form .card-glass {
+  background: var(--brand-surface);
+  border: 1px solid var(--brand-line);
+  backdrop-filter: none;
+  box-shadow: 0 16px 48px -28px rgba(49, 46, 129, 0.25);
+}
+
+@media (max-width: 900px) {
+  .brand-auth-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 20px; align-content: start; }
+  .brand-auth-form { margin: 12px auto 24px; }
+}
+
+@media (max-width: 380px) {
+  .brand-auth-layout { padding: 16px; }
+  .brand-auth-form .card-glass { padding: 24px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .brand-scope *, .brand-scope *::before, .brand-scope *::after {
     animation-duration: 0.01ms !important;
