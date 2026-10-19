@@ -1,0 +1,23 @@
+export default {
+  eyebrow: 'AI API GATEWAY',
+  title: 'One API. More possibilities.',
+  description: 'Connect your applications to available AI models. Manage API keys, track usage, and keep your integration in one place.',
+  home: 'Home', models: 'Models & pricing', docs: 'Documentation', login: 'Log in',
+  register: 'Create account', console: 'Open console', start: 'Start building',
+  explore: 'Explore the platform', theme: 'Switch color theme', skip: 'Skip to content',
+  sample: 'A familiar request format', sampleNote: 'Use an available model ID from your account. Endpoint compatibility depends on the selected channel.',
+  capabilities: 'Built for your workflow', capabilitiesIntro: 'Explore the models enabled by this site in the catalog. Availability and pricing depend on the configured channels.',
+  capability1: 'Unified integration', capability1Body: 'Connect through the supported API formats with credentials managed in your account.',
+  capability2: 'Keys under control', capability2Body: 'Create and manage API keys with the platform’s existing access controls.',
+  capability3: 'Usage at a glance', capability3Body: 'Review requests, token usage, and costs from your dashboard.',
+  quick: 'From idea to first request', quickIntro: 'A clear path from your account to your application.',
+  step1: 'Create your account', step1Body: 'Register when sign-up is open, or log in with your existing account.',
+  step2: 'Get an API key', step2Body: 'Open the console and create a key for your application.',
+  step3: 'Read the documentation', step3Body: 'Check the API address, supported models, and request format.',
+  step4: 'Make your first request', step4Body: 'Add your key to your application and review usage in the console.',
+  closing: 'Your next integration starts here.', contact: 'Contact', rights: 'All rights reserved.',
+  authTitle: 'A focused workspace for your AI applications.',
+  authBody: 'Your models, keys, and usage — connected in one place.',
+  authFeature1: 'Manage API credentials', authFeature2: 'Review usage and costs', authFeature3: 'Explore available models',
+  back: 'Back to home', secure: 'Account access'
+}

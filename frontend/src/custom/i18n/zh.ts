@@ -1,0 +1,22 @@
+export default {
+  eyebrow: '统一模型接入',
+  title: '连接模型，专注创造。',
+  description: '为应用接入可用的 AI 模型，在同一平台管理 API 密钥、查看用量，让集成过程更清晰。',
+  home: '首页', models: '模型与价格', docs: '使用文档', login: '登录',
+  register: '创建账号', console: '进入控制台', start: '开始使用',
+  explore: '了解平台', theme: '切换深浅主题', skip: '跳至主要内容',
+  sample: '熟悉的请求方式', sampleNote: '请使用账号中实际可用的模型 ID。接口兼容能力取决于所选渠道。',
+  capabilities: '让接入回归简单', capabilitiesIntro: '在模型广场查看本站已启用的模型。模型可用性与价格以实际渠道配置为准。',
+  capability1: '统一接口接入', capability1Body: '通过平台支持的 API 格式接入，在账号中统一管理调用凭据。',
+  capability2: '密钥管理有序', capability2Body: '使用现有访问控制功能，为应用创建和管理 API 密钥。',
+  capability3: '用量清晰可见', capability3Body: '在控制台查看请求、Token 用量和费用，了解应用的使用情况。',
+  quick: '从账号到第一次调用', quickIntro: '让每一步都清晰可循，把精力留给你的应用。',
+  step1: '创建账号', step1Body: '注册开放时创建账号，或使用已有账号登录。',
+  step2: '获取 API Key', step2Body: '进入控制台，为你的应用创建调用密钥。',
+  step3: '阅读使用文档', step3Body: '确认接口地址、可用模型及请求格式。',
+  step4: '发起首次调用', step4Body: '将密钥接入应用，并在控制台查看调用用量。',
+  closing: '让下一个想法，即刻连接。', contact: '联系方式', rights: '保留所有权利。',
+  authTitle: '专注于你的 AI 应用。', authBody: '在同一工作空间，连接模型、管理密钥、了解用量。',
+  authFeature1: '统一管理调用凭据', authFeature2: '查看用量与费用', authFeature3: '探索可用模型',
+  back: '返回首页', secure: '账号访问'
+}

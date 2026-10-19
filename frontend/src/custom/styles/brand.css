@@ -4,6 +4,7 @@
   --brand-ink: #18213b;
   --brand-muted: #53617b;
   --brand-line: #e2e7f0;
+  --brand-accent: #4f46e5;
 }
 
 .dark {
@@ -12,6 +13,7 @@
   --brand-ink: #eef2ff;
   --brand-muted: #aab7cf;
   --brand-line: #29344c;
+  --brand-accent: #a5b4fc;
 }
 
 .brand-scope {

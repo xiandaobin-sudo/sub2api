@@ -90,7 +90,14 @@
     </footer>
   </div>
 
-  <!-- Default Home Page -->
+  <CustomHome
+    v-else-if="customPresentation.home"
+    :site-name="siteName" :site-logo="siteLogo" :site-subtitle="siteSubtitle"
+    :doc-url="docUrl" :authenticated="isAuthenticated" :dashboard-path="dashboardPath"
+    :show-models="showModelPlazaEntry" :dark="isDark" @toggle-theme="toggleTheme"
+  />
+
+  <!-- Default Home Page (retained as an upstream fallback) -->
   <div
     v-else
     class="relative flex min-h-screen flex-col overflow-hidden bg-gradient-to-br from-gray-50 via-primary-50/30 to-gray-100 dark:from-dark-950 dark:via-dark-900 dark:to-dark-950"
@@ -501,6 +508,8 @@ import LocaleSwitcher from '@/components/common/LocaleSwitcher.vue'
 import Icon from '@/components/icons/Icon.vue'
 import { sanitizeUrl } from '@/utils/url'
 import { FeatureFlags, isFeatureFlagEnabled } from '@/utils/featureFlags'
+import CustomHome from '@/custom/components/CustomHome.vue'
+import { customPresentation } from '@/custom/presentation'
 
 const { t } = useI18n()
 
